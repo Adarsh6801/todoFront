@@ -88,4 +88,21 @@ export class ApiService {
       })
     )
   }
+
+  // delete todo 
+  deleteTodo(todoId:number){
+    return this.http.delete(`${this.API_URL}/todo/${todoId}`,{
+      headers:{
+        Authorization:`Bearer ${this.token}`
+      }
+    }).pipe(
+      tap((res:any)=>{
+        if(res.success){
+          this.toast.success('Todo deleted succesfully','',{
+            timeOut:1000
+          })
+        }
+      })
+    )
+  }
 }
