@@ -32,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatSelectModule,
     MatIconModule,
     MatButtonModule,
@@ -41,7 +42,6 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatCardModule,
     FormsModule,
-    HttpClientModule,
     ToastrModule.forRoot({
       closeButton:true,
       progressBar:true,

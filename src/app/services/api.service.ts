@@ -33,22 +33,30 @@ export class ApiService {
     });
   }
   // login user 
-  login(username:string,password:string){
-    return this.http.post(`${this.API_URL}/auth/login`,{username,password})
-    .subscribe((res:any)=>{
-      this.token=res.token;
-      if(this.token){
-        this.toast.success('Login successful, redirecting now....','',{
-          timeOut:700,
-          positionClass:'toast-top-center'
-        }).onHidden.toPromise().then(()=>{
-          this.jwtToken$.next(this.token)
-          localStorage.setItem('act',btoa(this.token));
-          this.router.navigateByUrl('/').then();
-        })
-      }
-    },(err:HttpErrorResponse)=>console.log(err.message))
+  login(username: string, password: string) {
+
+    this.http.post(`${this.API_URL}/auth/login`, {username, password})
+
+      .subscribe((res: any) => {
+        this.token = res.token;
+
+        if (this.token) {
+          this.toast.success('Login successful, redirecting now...', '', {
+            timeOut: 700,
+            positionClass: 'toast-top-center'
+          }).onHidden.toPromise().then(() => {
+            this.jwtToken$.next(this.token);
+            localStorage.setItem('act', btoa(this.token));
+            this.router.navigateByUrl('/').then();
+          });
+        }
+      }, (err: HttpErrorResponse) => {
+        this.toast.error('Authentication failed, try again', '', {
+          timeOut: 1000
+        });
+      });
   }
+  
 
   // logout user 
   logout(){
