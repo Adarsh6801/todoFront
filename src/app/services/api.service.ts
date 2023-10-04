@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +48,44 @@ export class ApiService {
         })
       }
     },(err:HttpErrorResponse)=>console.log(err.message))
+  }
+
+  // logout user 
+  logout(){
+    this.token='';
+    this.jwtToken$.next(this.token);
+    this.toast.success('Logged out succesfully','',{
+      timeOut:500
+    }).onHidden.subscribe(()=>{
+      localStorage.removeItem('act');
+      this.router.navigateByUrl('/login').then()
+    })
+    return '';
+  }
+
+  // create todo 
+  createTodo(title:string,description:string){
+    return this.http.post(`${this.API_URL}/todo`,{title,description},{
+      headers:{
+        Authorization:`Bearer ${this.token}`
+      }
+    })
+  }
+
+  // update todo 
+  updateTodo(statusValue:string,todoId:number){
+    return this.http.patch(`${this.API_URL}/todo/${todoId}`,{status:statusValue},{
+      headers:{
+        Authorization:`Bearer ${this.token}`
+      }
+    }).pipe(
+      tap((res: any)=>{
+        if(res){
+          this.toast.success('Status updated succesfully','',{
+            timeOut:1000
+          })
+        }
+      })
+    )
   }
 }
