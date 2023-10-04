@@ -15,10 +15,10 @@
       </div>
       <div class="d-flex icons align-items-center" *ngIf="!showMenu">
         <div class="mx-2">
-          <h3>Welcome, Tom</h3>
+          <h3>Welcome, {{username | titlecase}}</h3>
         </div>
         <div>
-          <mat-icon routerLink="/register">exit_to_app</mat-icon>
+          <mat-icon routerLink="/register" (click)="logout()">exit_to_app</mat-icon>
         </div>
       </div>
     </div>
