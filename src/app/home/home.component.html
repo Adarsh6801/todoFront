@@ -8,8 +8,8 @@
           <mat-label>Select a status</mat-label>
           <mat-select (selectionChange)="filterChanged($event)">
             <mat-option>All</mat-option>
-            <mat-option value="DONE">Completed</mat-option>
-            <mat-option value="IN_PROGRESS">In Progress</mat-option>
+            <mat-option value="COMPLETED">Completed</mat-option>
+            <mat-option value="WIP">In Progress</mat-option>
             <mat-option value="OPEN">Open</mat-option>
           </mat-select>
         </mat-form-field>
@@ -32,8 +32,8 @@
                   <mat-form-field>
                     <mat-label>Select a status</mat-label>
                     <mat-select [(value)]="t.status" (selectionChange)="statusChanged($event, t.id, i)">
-                      <mat-option value="DONE">Completed</mat-option>
-                      <mat-option value="IN_PROGRESS">In Progress</mat-option>
+                      <mat-option value="COMPLETED">Completed</mat-option>
+                      <mat-option value="WIP">In Progress</mat-option>
                       <mat-option value="OPEN">Open</mat-option>
                     </mat-select>
                   </mat-form-field>

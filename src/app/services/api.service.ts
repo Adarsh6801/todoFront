@@ -81,20 +81,22 @@ export class ApiService {
   }
 
   // update todo 
-  updateStatus(statusValue:string,todoId:number){
-    return this.http.patch(`${this.API_URL}/todo/${todoId}`,{status:statusValue},{
-      headers:{
-        Authorization:`Bearer ${this.token}`
+  updateStatus(statusValue: string, todoId: number) {
+    console.log(statusValue,'status');
+    
+    return this.http.patch(`${this.API_URL}/todo/${todoId}`, {status: statusValue}, {
+      headers: {
+        Authorization: `Bearer ${this.token}`
       }
     }).pipe(
-      tap((res: any)=>{
-        if(res){
-          this.toast.success('Status updated succesfully','',{
-            timeOut:1000
-          })
+      tap(res => {
+        if (res) {
+          this.toast.success('Status updated successfully', '', {
+            timeOut: 1000
+          });
         }
       })
-    )
+    );
   }
 
   // delete todo 
