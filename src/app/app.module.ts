@@ -19,6 +19,7 @@ import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatInputModule,
     MatCardModule,
     FormsModule,
+    HttpClientModule,
     ToastrModule.forRoot({
       closeButton:true,
       progressBar:true,
