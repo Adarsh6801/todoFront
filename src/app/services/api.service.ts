@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -113,4 +113,19 @@ export class ApiService {
       })
     )
   }
+
+  // register 
+// register 
+register(username: string, password: string) {
+  return this.http.post(`${this.API_URL}/auth/register`, { username, password }).pipe(
+    catchError((err: HttpErrorResponse) => {
+      this.toast.error(err.error.message, '', {
+        timeOut: 1000
+      });
+      // Return an observable to continue the error propagation
+      return throwError(err); // Import throwError from 'rxjs'
+    })
+  );
+}
+
 }
