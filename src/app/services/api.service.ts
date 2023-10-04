@@ -73,7 +73,7 @@ export class ApiService {
   }
 
   // update todo 
-  updateTodo(statusValue:string,todoId:number){
+  updateStatus(statusValue:string,todoId:number){
     return this.http.patch(`${this.API_URL}/todo/${todoId}`,{status:statusValue},{
       headers:{
         Authorization:`Bearer ${this.token}`
